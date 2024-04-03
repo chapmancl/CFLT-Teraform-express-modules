@@ -32,3 +32,14 @@ override.tf.json
 # Ignore CLI configuration files
 .terraformrc
 terraform.rc
+
+
+*.pyc
+*.pyo
+*.pyd
+__pycache__
+.pytest_cache
+bin
+lib
+lib64
+share

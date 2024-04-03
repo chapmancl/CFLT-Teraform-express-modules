@@ -1,12 +1,13 @@
 # https://github.com/confluentinc/terraform-provider-confluent/blob/master/examples/configurations/standard-kafka-rbac/main.tf
 
 locals {
+  key_prefix = "#############"
   stagging_env = "NP"
-  cc_cred_global_path = "CHAPMAN-GLOBAL"  
-  serviceaccount_name = "chapman-example-np"
-  serviceaccount_description = "service account for chapman automation demo"
+  cc_cred_global_path = "${local.key_prefix}-GLOBAL"  
+  serviceaccount_name = "${local.key_prefix}-example-np"
+  serviceaccount_description = "service account for ${local.key_prefix} automation demo"
   
-  cluster_name = "chapman_test2"
+  cluster_name = "${local.key_prefix}_test2"
   cluster_cloud = "GCP"
   cluster_region = "us-east1"
 
@@ -46,7 +47,7 @@ module servicekey {
 module GCPsecret {
   # write the new key to secrete manager for managing the cluster via automation
   source = "../../modules/gcp_ssm_clusterkey"
-  cc_cred_path = "CHAPMAN-${local.cluster_name}"
+  cc_cred_path = "${local.key_prefix}-${local.cluster_name}"
   cc_cred_obj = {
     cloud_api_key = module.cccredsglobal.cred_obj.cloud_api_key
     cloud_api_secret =  module.cccredsglobal.cred_obj.cloud_api_secret

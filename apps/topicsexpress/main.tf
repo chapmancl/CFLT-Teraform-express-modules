@@ -4,7 +4,7 @@ module express_topics {
     topic_names = ["failed_orders"] #,"user_accounts"
     app_name = "test2"
     stagging_env = "NP"
-    cc_cred_path = "CHAPMAN-chapman_test2"        
+    cc_cred_path = "#############"        
 }
 
 output "topic_names" {

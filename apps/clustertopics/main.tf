@@ -1,20 +1,21 @@
 # https://github.com/confluentinc/terraform-provider-confluent/blob/master/examples/configurations/standard-kafka-rbac/main.tf
 
 locals {
+  key_prefix = "#############"
   topic_names = ["topic_stocktrades","failed_orders"]
-  app_name = "project_example1"
+  app_name = "project_example"
   stagging_env = "NP"
-  cc_cred_global_path = "CHAPMAN-GLOBAL" 
-  serviceaccount_name = "chapman-example1-np"
-  serviceaccount_description = "service account for chapman automation demo"
+  cc_cred_global_path = "${local.key_prefix}-GLOBAL" 
+  serviceaccount_name = "${local.key_prefix}-example-${local.stagging_env}"
+  serviceaccount_description = "service account for ${local.key_prefix} automation demo"
   
-  cluster_name = "chapman_test1"
+  cluster_name = "${local.key_prefix}_test"
   cluster_cloud = "GCP"
   cluster_region = "us-east1"
 
 }
 module cccredsglobal {
-    source ="../../modules/cc_creds_global"
+    source ="../../modules/cc_creds_global_gcp"
     cc_cred_path = local.cc_cred_global_path
 }
 
@@ -46,7 +47,7 @@ module servicekey {
 module GCPappsecret {
   # write the new key to secrete manager for consumer/producer applications
   source = "../../modules/gcp_ssm_appkey"
-  cc_cred_path = "${local.app_name}-${local.stagging_env}"
+  cc_cred_path = "${local.key_prefix}-${local.app_name}-${local.stagging_env}"
   cc_cred_obj = {
     kafka_api_key = module.servicekey.cluster_key.id
     kafka_api_secret =  module.servicekey.cluster_key.secret
@@ -57,7 +58,7 @@ module GCPappsecret {
 module GCPmanagesecret {
   # write the new key to secrete manager for managing the cluster via automation
   source = "../../modules/gcp_ssm_clusterkey"
-  cc_cred_path = "CHAPMAN-${local.cluster_name}"
+  cc_cred_path = "${local.key_prefix}-${local.cluster_name}"
   cc_cred_obj = {
     cloud_api_key = module.cccredsglobal.cred_obj.cloud_api_key
     cloud_api_secret =  module.cccredsglobal.cred_obj.cloud_api_secret
