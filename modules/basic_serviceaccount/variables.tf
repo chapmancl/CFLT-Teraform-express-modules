@@ -14,7 +14,7 @@ variable "cc_cred" {
     cloud_api_secret = string
     envid = string    
   })
-  description = "Credential object from keystore"
+  description = "Credential object from GCP"
   nullable = false
 }
 

@@ -1,5 +1,9 @@
+provider "google-beta" {
+  project = var.gcp_projectid 
+}
+
 module cc_creds {
-    source ="../../modules/cc_creds_gcp"
+    source ="../../modules/cc_creds_cluster_gcp"
     cc_cred_path = var.cc_cred_path
 }
 
@@ -19,7 +23,7 @@ module servicekey {
 }
 
 module GCPsecret {
-  source = "../../modules/gcp_ssm"
+  source = "../../modules/gcp_ssm_appkey"
   cc_cred_path = "CC-${var.app_name}-${var.stagging_env}"
   cc_cred_obj = {
     kafka_api_key = module.servicekey.cluster_key.id

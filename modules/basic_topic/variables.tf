@@ -15,7 +15,7 @@ variable "cc_cred" {
     kafka_rest_endpoint = string
     clusterid = string
   })
-  description = "Credential object from keystore"
+  description = "Credential object from GCP"
   nullable = false
 }
 

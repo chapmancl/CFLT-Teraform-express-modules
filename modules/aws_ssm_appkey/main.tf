@@ -1,4 +1,4 @@
-#https://registry.terraform.io/modules/GoogleCloudPlatform/secret-manager/google/latest
+# https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/secretsmanager_secret_version
 
 variable "cc_cred_path" {
   type = string
@@ -12,27 +12,23 @@ variable "cc_cred_obj" {
     kafka_rest_endpoint = string
     brokerurl = string
   })
-  description = "Credential object from GCP"
+  description = "Credential object from AWS"
   nullable = false
 }
 
-resource "google_secret_manager_secret" "my-secret" {
-  provider = google-beta
-  secret_id = var.cc_cred_path
-  replication {
-    automatic = true
-  }
+resource "aws_secretsmanager_secret" "my-secret" {
+  name = var.cc_cred_path
+  description = "application key for topics in ${var.cc_cred_obj.kafka_rest_endpoint}"
 }
 
-resource "google_secret_manager_secret_version" "my-secret-version" {
-  provider = google-beta
-  secret      = google_secret_manager_secret.my-secret.id
-  secret_data =  jsonencode({
+resource "aws_secretsmanager_secret_version" "my-secret-version" {
+  secret_id     = aws_secretsmanager_secret.my-secret.id
+  secret_string = jsonencode({
     "kafka_api_key"       :"${var.cc_cred_obj.kafka_api_key}",
     "kafka_api_secret"    :"${var.cc_cred_obj.kafka_api_secret}",
     "kafka_rest_endpoint" :"${var.cc_cred_obj.kafka_rest_endpoint}",
     "brokerurl" :"${var.cc_cred_obj.brokerurl}"
-  })
+  })  
 }
 
 output cred_path {

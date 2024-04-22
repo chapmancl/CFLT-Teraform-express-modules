@@ -22,7 +22,7 @@ variable "cc_cred" {
     envid = string
     clusterid = string
   })
-  description = "Credential object from keystore"
+  description = "Credential object from GCP"
   nullable = false
 }
 

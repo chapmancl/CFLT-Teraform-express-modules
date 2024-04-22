@@ -15,7 +15,12 @@ variable "stagging_env" {
 }
 variable "cc_cred_path" {
   type = string
-  description = "path to the credential object from secret manager"
+  description = "path to the credential object from GCP secret manager"
+  nullable = false
+}
+variable "gcp_projectid" {
+  type = string
+  description = "project id from GCP associated with these resources"
   nullable = false
 }
 

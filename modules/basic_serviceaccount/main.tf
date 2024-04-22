@@ -13,5 +13,8 @@ resource "confluent_service_account" "basic_sa" {
 output serviceaccount_id {
   value = resource.confluent_service_account.basic_sa.id
 }
+output serviceaccount_name {
+  value = resource.confluent_service_account.basic_sa.display_name
+}
 
 

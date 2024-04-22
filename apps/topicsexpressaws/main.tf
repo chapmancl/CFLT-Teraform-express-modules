@@ -1,10 +1,11 @@
 
 module express_topics {
-    source ="../../modules/topics_express"
+    source ="../../modules/aws_topics_express"
     topic_names = ["failed_orders"] #,"user_accounts"
-    app_name = "test2"
-    stagging_env = "NP"
-    cc_cred_path = "#############"        
+    app_name = "testawsapp"
+    stagging_env = "NP"    
+    aws_region = "us-east-2" 
+    cc_cred_path = "" # path to the cluster level key in secrets manager
 }
 
 output "topic_names" {

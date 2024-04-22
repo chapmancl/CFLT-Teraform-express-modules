@@ -38,6 +38,7 @@ output cluster_cred_obj {
       envid = var.cc_cred.envid
       clusterid = var.cc_cred.clusterid
     }
+    sensitive = true
 }
 
 output cluster_key {

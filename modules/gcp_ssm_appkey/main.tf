@@ -20,7 +20,7 @@ resource "google_secret_manager_secret" "my-secret" {
   provider = google-beta
   secret_id = var.cc_cred_path
   replication {
-    automatic = true
+   auto { } 
   }
 }
 

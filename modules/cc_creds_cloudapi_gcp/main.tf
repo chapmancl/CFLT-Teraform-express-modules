@@ -15,7 +15,7 @@ output "cred_obj" {
     cloud_api_secret = local.secret_variables.cloud_api_secret
     envid = local.secret_variables.envid    
   }
+  sensitive = true
 }
 
-output "ssm" {   value = local.secret_variables }
 output "envid"                { value = local.secret_variables.envid }

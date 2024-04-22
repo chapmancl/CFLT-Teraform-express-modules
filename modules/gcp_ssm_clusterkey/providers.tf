@@ -4,9 +4,5 @@ terraform {
     }
 }
 
-provider "google-beta" {
-  project = "" # replace with your project ID
-}
-
 
 

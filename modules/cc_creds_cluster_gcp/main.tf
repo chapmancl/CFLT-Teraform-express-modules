@@ -20,12 +20,8 @@ output "cred_obj" {
     envid = local.secret_variables.envid
     clusterid = local.secret_variables.clusterid    
   }
-
+  sensitive = true
 }
 
-output "ssm" {   value = local.secret_variables }
-output "kafka_api_key"        { value = local.secret_variables.kafka_api_key }
-output "kafka_api_secret"     { value = local.secret_variables.kafka_api_secret }
-output "kafka_rest_endpoint"  { value = local.secret_variables.kafka_rest_endpoint }
 output "envid"                { value = local.secret_variables.envid }
-output "clusterid"            { value = local.secret_variables.clusterid }
+
