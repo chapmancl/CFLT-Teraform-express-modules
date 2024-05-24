@@ -2,7 +2,7 @@
 # https://registry.terraform.io/providers/confluentinc/confluent/latest/docs/resources/confluent_kafka_cluster
 
 locals {
-  key_prefix = "chapmanAWSdemo"
+  key_prefix = "ConfluentAWSdemo"
   stagging_env = "NP"
   
   cluster_name = "test"

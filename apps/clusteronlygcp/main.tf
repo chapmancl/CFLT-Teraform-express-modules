@@ -1,7 +1,7 @@
 # https://github.com/confluentinc/terraform-provider-confluent/blob/master/examples/configurations/standard-kafka-rbac/main.tf
 
 locals {
-  key_prefix = "chapmanGCPdemo"
+  key_prefix = "ConfluentGCPdemo"
   stagging_env = "NP"
   
   cluster_name = "test"

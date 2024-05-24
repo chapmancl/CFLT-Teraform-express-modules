@@ -1,0 +1,17 @@
+steps:
+# Build the container image
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['build', '-t', 'gcr.io/<<YOU GCP PROJECT ID HERE>>/tradetracker:$COMMIT_SHA', '.']
+# Push the container image to Container Registry
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['push', 'gcr.io/<<YOU GCP PROJECT ID HERE>>/tradetracker:$COMMIT_SHA']
+# Deploy container image to Cloud Run sevice
+- name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+  entrypoint: gcloud
+  args: ['run', 'deploy', 'gcp-consumer', '--image', 'gcr.io/<<YOU GCP PROJECT ID HERE>>/tradetracker:$COMMIT_SHA', '--region', 'us-central1']
+# Deploy container image to Cloud Run sevice
+- name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+  entrypoint: gcloud
+  args: ['run', 'jobs', 'update', 'demo-python-consumer', '--image', 'gcr.io/<<YOU GCP PROJECT ID HERE>>/tradetracker:$COMMIT_SHA', '--region', 'us-central1', '--execute-now']
+images:
+- gcr.io/<<YOU GCP PROJECT ID HERE>>/tradetracker:$COMMIT_SHA

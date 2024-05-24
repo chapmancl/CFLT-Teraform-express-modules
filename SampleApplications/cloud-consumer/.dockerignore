@@ -1,0 +1,14 @@
+Dockerfile
+README.md
+*.pyc
+*.pyo
+*.pyd
+pyvenv.cfg
+__pycache__
+.pytest_cache
+.gitignore
+.gcloudignore
+.git
+cloudbuild.yaml
+package/
+

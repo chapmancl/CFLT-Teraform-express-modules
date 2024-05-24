@@ -61,6 +61,10 @@ module "rbac-cluster" {
   role_name = "CloudClusterAdmin"
 }
 
+output "cc_creds" {
+  sensitive = true
+  value = module.cc_creds.cred_obj
+}
 output "topic_names" {
   value = module.newtopic.topic_names
 }
@@ -70,4 +74,8 @@ output cred_path {
 output cc_api_key {
   value = module.AWSsecret.cc_api_key
 }
+output serviceaccount_id {
+  value = module.serviceaccount.serviceaccount_id
+}
+
 

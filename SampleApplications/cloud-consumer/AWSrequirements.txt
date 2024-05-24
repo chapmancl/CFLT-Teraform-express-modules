@@ -1,0 +1,7 @@
+confluent-kafka
+boto3
+requests
+urllib3
+Flask
+gunicorn
+awslambdaric
